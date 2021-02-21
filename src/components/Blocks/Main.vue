@@ -111,6 +111,7 @@ export default {
       @media (max-width: 620px) {
         width: 420px;
         position: absolute;
+        height: auto;
         top: 0;
         left: 0;
       }
@@ -162,8 +163,8 @@ export default {
       margin-top: 32px;
     }
     @media (max-width: 480px) {
-      font-size: 18px;
-      line-height: 24px;
+      font-size: 24px;
+      line-height: 32px;
     }
   }
 
