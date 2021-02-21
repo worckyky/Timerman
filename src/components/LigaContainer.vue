@@ -1,12 +1,17 @@
 <template>
-  <div class="DiffContainer">
-    <img :src="require(`@/assets/images/difference/${image}`)"
+  <div class="LigaContainer">
+    <img :src="require(`@/assets/images/liga/${image}`)"
          :alt="alt"
-         class="DiffContainer__image"
+         class="LigaContainer__image"
     >
-    <p class="DiffContainer__paragraph">
-      <slot/>
-    </p>
+    <div class="LigaContainer__text">
+      <p class="LigaContainer__text_title">
+        <slot name="title"></slot>
+      </p>
+      <h3 class="LigaContainer__text_price">
+        <slot name="price"></slot>
+      </h3>
+    </div>
   </div>
 </template>
 
@@ -24,12 +29,13 @@ export default {
 @import "~@/assets/styles/_variables.scss";
 @import "~@/assets/styles/mixins.scss";
 
-.DiffContainer {
+.LigaContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   &__image {
-    max-width: 200px;
+    max-width: 180px;
+    margin-bottom: 24px;
     @media (max-width: 992px) {
       max-width: 80%;
     }
@@ -40,20 +46,26 @@ export default {
       max-width: 240px;
     }
   }
-  &__paragraph {
-    margin-top: 24px;
-    font-size: 20px;
-    line-height: 28px;
+  &__text {
     color: $dark;
     text-align: center;
-    @media (max-width: 992px) {
-      font-size: 16px;
-      line-height: 24px;
-    }
-    @media (max-width: 756px) {
+    background-color: $gray600;
+    width: 100%;
+    padding: 32px 24px;
+    &_title {
       font-size: 20px;
-      line-height: 26px;
+      line-height: 32px;
+      margin-bottom: 24px;
+      min-height: 64px;
     }
+    //@media (max-width: 992px) {
+    //  font-size: 16px;
+    //  line-height: 24px;
+    //}
+    //@media (max-width: 756px) {
+    //  font-size: 20px;
+    //  line-height: 26px;
+    //}
   }
 }
 

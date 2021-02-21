@@ -1,3 +1,4 @@
+@import "~@/assets/styles/_variables.scss";
 @mixin layout() {
   max-width: 1200px;
   margin: 0 auto;
@@ -8,5 +9,17 @@
   }
   @media (max-width: 479px) {
     padding: 0 15px;
+  }
+}
+
+@mixin title() {
+  font-size: 24px;
+  line-height: 32px;
+  color: $dark;
+  font-weight: 700;
+  text-transform: uppercase;
+  @media (max-width: 480px) {
+    font-size: 18px;
+    line-height: 32px;
   }
 }

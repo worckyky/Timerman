@@ -1,5 +1,6 @@
 <template>
   <div class="Activity">
+    <div class="Activity__float"></div>
     <div class="Activity__container">
       <div class="Activity__content">
         <h2 class="Activity__title">
@@ -7,45 +8,33 @@
         </h2>
       </div>
       <div class="Activity__actions">
+        <div class="Activity__navigation">
+          <div class="slide__label slide__label-left" @click="prevSlide"></div>
+          <div class="slide__label slide__label-right" @click="nextSlide"></div>
+        </div>
         <Carousel
             :navigation-enabled="sliderConfig.navigationEnabled"
             :pagination-enabled="sliderConfig.paginationEnabled"
-            :navigation-next-label="sliderConfig.nextLabel"
-            :navigation-prev-label="sliderConfig.prevLabel"
             :autoplay="sliderConfig.autoplay"
             :per-page="sliderConfig.perPage"
             :autoplay-timeout="sliderConfig.autoplayTimeout"
             :loop="sliderConfig.loop"
             :speed="sliderConfig.speed"
             :autoplay-hover-pause="sliderConfig.autoplayHoverPause"
-            :perPageCustom="[[320, 1], [480, 3]]"
+            :perPageCustom="[[320, 1], [756, 2], [1024, 3]]"
+            ref="carousel"
+            class="Activity__carousel"
         >
-          <Slide>
-            <div class="Activity__block">
-              <div class="Activity__top">
-                <div class="privet">
-                  <span>03 октября, вс</span>
-                  <span>●</span>
-                  <span>Казань</span>
-                </div>
-                <div class="Activity__head">
-                  <h3>Казанский национальный полумарафон 2021</h3>
-                  <span class="Activity__tag">Забег</span>
-                </div>
-              </div>
-              <div class="Activity__bottom">
-                <div class="Activity__distance">
-                  <span>Забег TIMERMANKIDS</span>
-                  <span>3 км,</span>
-                  <span>10 км,</span>
-                  <span>21.1 км,</span>
-                </div>
-                <div class="Activity__button">
-                  <button>Регистрация</button>
-                  <button>Подробнее</button>
-                </div>
-              </div>
-            </div>
+          <Slide v-for="(action, i) of actions" :key="i">
+            <Action
+                :title="action.title"
+                :date="action.date"
+                :tag="action.tag"
+                :b-g="action.BG"
+                :distance="action.distance"
+                :reg-link="action.regLink"
+                :more-link="action.moreLink"
+            />
           </Slide>
         </Carousel>
       </div>
@@ -53,65 +42,15 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import "~@/assets/styles/_variables.scss";
-@import "~@/assets/styles/mixins.scss";
-
-.Activity {
-  &__container {
-    @include layout;
-  }
-
-  &__title {
-    @include title;
-  }
-
-  &__block {
-    height: 364px;
-    width: 364px;
-    border: 1px solid red;
-    padding: 24px;
-    position: relative;
-  }
-  &__top, &__bottom {
-    max-height: 120px;
-    position: absolute;
-    padding-right: 24px;
-  }
-  &__top {
-    top: 24px;
-  }
-  &__bottom {
-    bottom: 24px
-  ;
-  }
-  &__date {
-    font-size: 14px;
-    line-height: 14;
-    height: fit-content;
-  }
-
-  &__head {
-    display: flex;
-    justify-content: space-between;
-
-    h3 {
-      font-size: 16px;
-      line-height: 24px;
-    }
-  }
-}
-</style>
-
-
 <script>
-
-import {Carousel, Slide} from 'vue-carousel'
+import {Carousel , Slide} from 'vue-carousel'
+import Action from "@/components/Action";
 
 export default {
   components: {
+    Action,
     Carousel,
-    Slide,
+    Slide
   },
   data() {
     return {
@@ -124,13 +63,169 @@ export default {
         paginationPosition: ['overlay', 'bottom-overlay'],
         speed: 1000,
         autoplayHoverPause: false,
-        navigationEnabled: true,
         paginationEnabled: false,
-        nextLabel: '<div class="slide__label slide__label-right"></div>',
-        prevLabel: '<div class="slide__label slide__label-left"></div>',
+
       },
+      actions: [
+        {
+          title: 'Казанский национальный полумарафон 2021',
+          BG: '1.jpeg',
+          tag: 'Забег',
+          date: {
+            day: "03 октября, вс",
+            district: "Казань"
+          },
+          distance: ['10 км,', '21.1 км,', '3 км,', 'Забег TIMERMANKIDS'],
+          regLink: '#',
+          moreLink: '#'
+        },
+        {
+          title: 'Казанский национальный полумарафон 2021',
+          BG: '1.jpeg',
+          tag: 'Забег',
+          date: {
+            day: "03 октября, вс",
+            district: "Казань"
+          },
+          distance: ['10 км,', '21.1 км,', '3 км,', 'Забег TIMERMANKIDS'],
+          regLink: '#',
+          moreLink: '#'
+        },
+        {
+          title: 'Казанский национальный полумарафон 2021',
+          BG: '1.jpeg',
+          tag: 'Забег',
+          date: {
+            day: "03 октября, вс",
+            district: "Казань"
+          },
+          distance: ['10 км,', '21.1 км,', '3 км,', 'Забег TIMERMANKIDS'],
+          regLink: '#',
+          moreLink: '#'
+        },
+        {
+          title: 'Казанский национальный полумарафон 2021',
+          BG: '1.jpeg',
+          tag: 'Забег',
+          date: {
+            day: "03 октября, вс",
+            district: "Казань"
+          },
+          distance: ['10 км,', '21.1 км,', '3 км,', 'Забег TIMERMANKIDS'],
+          regLink: '#',
+          moreLink: '#'
+        }
+      ]
+    }
+  },
+  methods: {
+    nextSlide() {
+      this.$refs.carousel.goToPage(this.$refs.carousel.getNextPage());
+    },
+    prevSlide() {
+      this.$refs.carousel.goToPage(this.$refs.carousel.getPreviousPage());
+    }
+  },
+}
+</script>
+
+
+<style lang="scss">
+@import "~@/assets/styles/_variables.scss";
+@import "~@/assets/styles/mixins.scss";
+
+.Activity {
+  padding: 132px 0;
+  position: relative;
+  @media (max-width: 992px) {
+    padding: 56px 0;
+  }
+  &__float {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 400px;
+    background-color: $gray600;
+    overflow: hidden;
+    z-index: -1;
+    &::after {
+      content: '';
+      background: url("../../assets/images/TimerPattern.svg");
+      position: absolute;
+      width: 580px;
+      height: 466px;
+      display: block;
+      top: 50px;
+      left: 80px;
+    }
+    @media (max-width: 992px) {
+      opacity: 0.4;
+    }
+  }
+  &__container {
+    @include layout;
+  }
+  &__actions {
+    display: flex;
+    flex-direction: column;
+  }
+  &__title {
+    @include title;
+    margin-bottom: 56px;
+    @media (max-width: 992px) {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+  }
+  &__navigation {
+    display: flex;
+    margin-bottom: 40px;
+    width: 140px;
+    justify-content: space-between;
+    order: 1;
+    @media (max-width: 992px) {
+      width: 100%;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 480px) {
+      width: 100%;
+      order: 2;
+    }
+  }
+  &__carousel {
+    order: 2;
+    @media (max-width: 480px) {
+      margin-bottom: 24px;
+      order: 1;
     }
   }
 }
-</script>
+
+.slide {
+  &__label {
+    width: 48px;
+    height: 48px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: ease-in-out 0.3s;
+    cursor: pointer;
+    &-right {
+      background-image: url('../../assets/images/brands/slider/nav-right.svg');
+      &:hover {
+        transform: translateX(10px);
+      }
+    }
+
+    &-left {
+      background-image: url('../../assets/images/brands/slider/nav-left.svg');
+      &:hover {
+        transform: translateX(-10px);
+      }
+    }
+
+  }
+
+}
+
+</style>
 
