@@ -56,8 +56,8 @@ export default {
   cursor: pointer;
   font-weight: 500;
   width: fit-content;
-  -webkit-appearance: button;
-  -moz-appearance: button;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: button;
   text-decoration: none;
   color: initial;
