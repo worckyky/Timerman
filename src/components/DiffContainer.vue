@@ -34,10 +34,10 @@ export default {
       max-width: 80%;
     }
     @media (max-width: 756px) {
-      max-width: 320px;
+      max-width: 140px;
     }
     @media (max-width: 480px) {
-      max-width: 240px;
+      max-width: 120px;
     }
   }
   &__paragraph {
@@ -51,8 +51,10 @@ export default {
       line-height: 24px;
     }
     @media (max-width: 756px) {
-      font-size: 20px;
-      line-height: 26px;
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 22px;
+      padding: 0 8px;
     }
   }
 }

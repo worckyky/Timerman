@@ -120,6 +120,7 @@ export default {
     grid-gap: 16px;
     @media (max-width: 756px) {
       grid-template-columns: 1fr;
+      grid-template-rows: auto;
       row-gap: 40px;
     }
   }

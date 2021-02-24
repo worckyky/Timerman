@@ -35,9 +35,11 @@ export default {
     margin-top: 56px;
   }
   @media (max-width: 756px) {
-    width: 100%;
     &:nth-child(2n) {
       margin-top: 0;
+    }
+    &:nth-last-child(1) {
+      width: 100%;
     }
   }
   @media (max-width: 480px) {
@@ -47,7 +49,7 @@ export default {
   &__content {
     display: flex;
     justify-content: center;
-    @media (max-width: 480px) {
+    @media (max-width: 756px) {
       flex-direction: column;
       align-items: center;
       margin-bottom: 24px;
@@ -75,6 +77,18 @@ export default {
       border: 1px solid $red;
       z-index: -1;
     }
+    @media (max-width: 756px) {
+      height: 80px;
+      width: 80px;
+      font-size: 40px;
+      line-height: 40px;
+      &::after {
+        height: 80px;
+        width: 80px;
+        top: 10px;
+        left: 10px;
+      }
+    }
   }
   &__description {
     font-size: 20px;
@@ -89,15 +103,19 @@ export default {
       width: 56px;
       margin-top: 24px;
     }
-    @media (max-width: 480px) {
-      margin-top: 32px;
-      text-align: center;
-      padding-left: 0;
-      font-size: 16px;
-      line-height: 24px;
-      display: flex;
+    @media (max-width: 756px) {
+      margin-top: 24px;
+      font-size: 14px;
+      line-height: 22px;
+      padding: 0 8px;
       align-items: center;
+      text-align: center;
+      display: flex;
     }
+    //@media (max-width: 480px) {
+    //  margin-top: 32px;
+    //
+    //}
   }
 
 }
