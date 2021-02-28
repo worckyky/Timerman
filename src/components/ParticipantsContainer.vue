@@ -5,7 +5,6 @@
         <span>Бегут дистанцию:</span>
         <label for="distance" class="Participants__select">
           <select id="distance" v-model="p.choseDistance" @change="clearSelect(p.id)">
-
             <option v-for="(d, i) of propDistance" :key="i" :value="d[1]">
               {{ d[0] }}
             </option>
@@ -43,7 +42,9 @@ export default {
           sum: 0
         }
       ],
-      fullPrice: 0
+      fullPrice: 0,
+      countOfMembers: 0,
+      allDistance: 0,
     }
   },
   methods: {
@@ -89,7 +90,14 @@ export default {
       this.fullPrice = this.participants.reduce((acum, elem) => {
         return acum + elem.sum
       }, 0)
-      this.$emit('pushSum', this.fullPrice)
+      this.countOfMembers = this.participants.reduce((acum, elem) => {
+        return acum + +elem.count
+      }, 0)
+      this.allDistance = this.participants.reduce((acum, elem) => {
+        const myDistance = elem.distance.find(i => i[1] === elem.choseDistance)[0]
+        return [...acum, myDistance]
+      }, [])
+      this.$emit('pushSum', [this.fullPrice, this.countOfMembers, this.allDistance])
     }
   },
   computed: {
@@ -129,6 +137,7 @@ export default {
     cursor: pointer;
     transition: ease-in-out 0.2s;
     margin-top: 16px;
+
     img {
       margin-right: 8px;
     }
