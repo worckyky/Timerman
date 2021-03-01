@@ -38,5 +38,8 @@ export default {
   padding: 0;
   margin: 0;
 }
+input, textarea, select {
+  -webkit-appearance: none;
+}
 
 </style>
