@@ -28,19 +28,21 @@
         </div>
       </div>
       <div class="Calculator__result">
-        <div class="Calculator__result-sum">
-          <h2>Сумма:</h2>
-          <span>{{ sum + ' ₽' }}</span>
-        </div>
-        <div class="Calculator__result-info">
-          <h2>Результат подсчета:</h2>
-          <div class="Calculator__result-data">
-            <p>Мероприятие:<span>{{ info === null ? `Не выбрано` : info.name }}</span></p>
-            <p>Лига:<span>{{ ligaPrice === 0 ? `Не выбрана` : showLiga }}</span></p>
-            <p>Дистанции: <span v-if="memberDistances.length === 0">Нет дистанций</span> <span
-                v-for="(m, i) of memberDistances" :key="i">{{ m + ',' }}</span></p>
-            <p>Общее количество участников:<span>{{ countOfMembers === 0 ? `Нет участников` : countOfMembers }}</span>
-            </p>
+        <div class="Calculator__scroll">
+          <div class="Calculator__result-sum">
+            <h2>Сумма:</h2>
+            <span>{{ sum + ' ₽' }}</span>
+          </div>
+          <div class="Calculator__result-info">
+            <h2>Данные подсчета:</h2>
+            <div class="Calculator__result-data">
+              <p>Мероприятие:<span>{{ info === null ? `Не выбрано` : info.name }}</span></p>
+              <p>Лига:<span>{{ ligaPrice === 0 ? `Не выбрана` : showLiga }}</span></p>
+              <p>Дистанции: <span v-if="memberDistances.length === 0">Нет дистанций</span> <span
+                  v-for="(m, i) of memberDistances" :key="i">{{ m + ',' }}</span></p>
+              <p>Общее количество участников:<span>{{ countOfMembers === 0 ? `Нет участников` : countOfMembers }}</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -132,17 +134,28 @@ export default {
 
 .Calculator {
   padding: 80px 0;
-
+  @media (max-width: 480px) {
+    padding: 32px 0;
+  }
   &__container {
     @include layout;
     display: grid;
     grid-template-columns: 558px 1fr;
     grid-column-gap: 24px;
+    @media (max-width: 1060px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 756px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__title {
     @include title;
     margin-bottom: 80px;
+    @media (max-width: 480px) {
+      margin-bottom: 48px;
+    }
   }
 
   &__three {
@@ -152,11 +165,18 @@ export default {
   &__content {
     &-block {
       margin-bottom: 56px;
-
+      @media (max-width: 480px) {
+        margin-bottom: 24px;
+      }
       p, span {
         font-size: 20px;
         line-height: 34px;
         margin-bottom: 32px;
+        @media (max-width: 480px) {
+          font-size: 14px;
+          line-height: 22px;
+          margin-bottom: 16px;
+        }
       }
 
       span {
@@ -164,10 +184,14 @@ export default {
       }
     }
   }
-
+  &__scroll {
+    position: sticky;
+    top: 32px;
+  }
   &__result {
     position: relative;
-
+    display: flex;
+    flex-direction: column;
     h2 {
       font-size: 18px;
       line-height: 24px;
@@ -175,24 +199,12 @@ export default {
       color: $dark;
     }
 
-    display: grid;
-    grid-template-rows: 92px 1fr;
-    grid-row-gap: 16px;
-
-    &-info, &-sum {
-      padding: 32px;
-      background-color: $gray600;
-      height: inherit;
-    }
 
     &-sum {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      border: 1px solid #9d9d9d;
-      top: 32px;
-
+      margin-bottom: 24px;
       span {
         font-size: 24px;
         line-height: 24px;
@@ -202,11 +214,23 @@ export default {
       }
     }
 
+    &-info, &-sum {
+      padding: 32px;
+      background-color: $gray600;
+      height: inherit;
+      @media (max-width: 480px) {
+        padding: 24px;
+      }
+    }
+
     &-data {
       margin-top: 56px;
       font-size: 20px;
       line-height: 32px;
-
+      @media (max-width: 1060px) {
+        font-size: 16px;
+        line-height: 24px;
+      }
       p {
         margin-bottom: 24px;
         color: $dark;
@@ -215,6 +239,9 @@ export default {
       span {
         color: $red;
         padding-left: 16px;
+        @media (max-width: 1060px) {
+          padding-left: 8px;
+        }
       }
     }
   }

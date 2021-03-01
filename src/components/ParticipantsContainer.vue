@@ -2,16 +2,20 @@
   <div>
     <div class="Participants">
       <div class="Participants__block" v-for="(p, i) of participants" :key="i" @change="showChange">
-        <span>Бегут дистанцию:</span>
-        <label for="distance" class="Participants__select">
-          <select id="distance" v-model="p.choseDistance" @change="clearSelect(p.id)">
-            <option v-for="(d, i) of propDistance" :key="i" :value="d[1]">
-              {{ d[0] }}
-            </option>
-          </select>
-        </label>
-        <span>Человек:</span>
-        <input type="number" min="0" v-model="p.count" @change="sumData(p.id, +p.count, p.choseDistance)">
+        <div class="Participants__block-wrapper">
+          <span>Проходят дистанцию:</span>
+          <label for="distance" class="Participants__select">
+            <select id="distance" v-model="p.choseDistance" @change="clearSelect(p.id)">
+              <option v-for="(d, i) of propDistance" :key="i" :value="d[1]">
+                {{ d[0] }}
+              </option>
+            </select>
+          </label>
+        </div>
+        <div class="Participants__block-wrapper">
+          <span>Человек:</span>
+          <input type="number" min="0" v-model="p.count" @change="sumData(p.id, +p.count, p.choseDistance)">
+        </div>
         <div @click="DeleteDistance(p.id, p.sum)" v-if="i !== 0" class="Participants__delete">
           <img src="../assets/images/delete_icon.svg" alt="">
         </div>
@@ -137,7 +141,16 @@ export default {
     cursor: pointer;
     transition: ease-in-out 0.2s;
     margin-top: 16px;
-
+    @media (max-width: 756px) {
+      margin-bottom: 24px;
+    }
+    @media (max-width: 480px) {
+      height: 60px;
+      font-size: 14px;
+      img {
+        width: 24px;
+      }
+    }
     img {
       margin-right: 8px;
     }
@@ -154,12 +167,55 @@ export default {
     align-items: center;
     margin-top: 16px;
     position: relative;
+    @media (max-width: 1060px){
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    @media (max-width: 756px) {
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    @media (max-width: 576px){
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      @media (max-width: 1060px) {
+        &:nth-child(1) {
+          margin-bottom: 16px;
+        }
+      }
+      @media (max-width: 756px) {
+        &:nth-child(1) {
+          margin-bottom: 0;
+        }
+      }
+      @media (max-width: 576px) {
+        &:nth-child(1) {
+          margin-bottom: 16px;
+        }
+        width: 100%;
+      }
+      @media (max-width: 480px) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
 
     span {
       font-size: 12px;
       line-height: 12px;
       margin-right: 8px;
       width: max-content;
+      @media (max-width: 480px) {
+        margin-right: 0;
+        margin-bottom: 8px;
+      }
     }
 
     input {
@@ -172,7 +228,10 @@ export default {
       cursor: pointer;
       outline: none;
       transition: ease-in-out 0.2s;
-
+      @media (max-width: 480px) {
+        width: 85%;
+        max-width: none;
+      }
       &:focus {
         color: $dark;
       }
@@ -193,7 +252,9 @@ export default {
     z-index: 1;
     border: 1px solid $gray600;
     transition: ease-in-out 0.2s;
-
+    @media (max-width: 480px) {
+      width: 85%;
+    }
     &:focus {
       select {
         color: $dark;

@@ -54,6 +54,10 @@ export default {
   display: grid;
   grid-gap: 24px;
   grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 480px) {
+    grid-gap: 8px;
+    grid-template-columns: repeat(3, auto);
+  }
   &__block {
     height: 170px;
     border: 1px solid $gray600;
@@ -62,12 +66,24 @@ export default {
     justify-content: center;
     align-items: center;
     transition: ease-in-out 0.3s;
+    @media (max-width: 1060px) {
+      height: 120px;
+    }
+    @media (max-width: 480px) {
+      height: 100px;
+    }
     &:hover {
       background-color: rgba(200, 20, 28, 0.1);
     }
     img {
       width: 100px;
       filter: grayscale(1);
+      @media (max-width: 1060px) {
+        width: 60px;
+      }
+      @media (max-width: 480px) {
+        width: 40px;
+      }
     }
     &_active {
       border: 1px solid $red;
